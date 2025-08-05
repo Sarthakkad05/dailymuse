@@ -9,6 +9,7 @@ import TopBar from "@/components/common/TopBar"
 import WritingArea from "@/components/common/WritingArea"
 import { getGeminiInsight } from "@/lib/gemini/getInsights"
 import InsightModal from "@/components/common/InsightModal"
+import  MuseChat  from "@/components/common/MuseChat"
 
 
 interface JournalEntry {
@@ -181,7 +182,9 @@ export default function Dashboard() {
             insight={insight}
           />
         </div>
+        <MuseChat userId={session?.user?.id} />
       </div>
+
     </div>
   )
 }
