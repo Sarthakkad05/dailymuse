@@ -9,7 +9,7 @@ interface TopBarProps {
 
 export default function TopBar({ onSave, isSaving = false, saveStatus = "idle" }: TopBarProps) {
   return (
-    <div className="bg-background border-b border-border p-4">
+    <div className="bg-backgraound border-b border-border p-4">
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-xl font-semibold text-card-foreground">Journal Entry</h2>

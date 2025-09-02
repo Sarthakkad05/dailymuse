@@ -19,11 +19,7 @@ export const reflectiveQuestions = async (): Promise<string> => {
       - Keep the total response under 3 sentences.
       - The question should be simple and easy to understand.
       - single question
-
-
       
-      
-      Now generate one more:
       `;
       
         const result = await model.generateContent(prompt);

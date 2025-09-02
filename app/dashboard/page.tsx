@@ -119,11 +119,8 @@ export default function Dashboard() {
 
   const navigationItems = [
     { icon: Home, label: "Dashboard", href: "/dashboard" },
-    { icon: Brain, label: "Mental Clarity", href: "#" },
-    { icon: Target, label: "Habit Coach", href: "#" },
     { icon: MessageCircle, label: "Chat with Muse", href: "#" },
     { icon: FileText, label: "New Entry", href: "/dashboard" },
-    { icon: Calendar, label: "Timeline", href: "/journal-entries" }
   ]
 
   if (loading) {
@@ -182,7 +179,7 @@ export default function Dashboard() {
             insight={insight}
           />
         </div>
-        <MuseChat userId={session?.user?.id} />
+        {/* <MuseChat userId={session?.user?.id} /> */}
       </div>
 
     </div>
