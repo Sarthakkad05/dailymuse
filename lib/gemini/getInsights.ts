@@ -15,6 +15,7 @@ ${content}
 
 Based on this, generate a short but meaningful response that includes:
 1. **Personalized Insight** — Reflect empathetically on the user's mindset or emotions. Help them see a meaningful perspective or pattern in what they've written. Keep it warm and personal (4–6 sentences).
+3. **Detect mood** — According to the user's journal entry, detect the mood of the user.
 2. **One Small Actionable Task** — Suggest a clear, simple action the user can take today to support their well-being or growth. Make it feel doable and tailored to their state of mind.
 3. **Motivational Quote** — Share a quote that aligns with their current mindset or challenge. Keep it short and inspiring.
 
