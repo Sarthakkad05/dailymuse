@@ -57,21 +57,21 @@ export default function MuseChat({ userId }: { userId: string }) {
   }, [expanded])
 
   return (
-    <div ref={containerRef} className="fixed bottom-4 right-4 w-[300px] z-50">
+    <div ref={containerRef} className="fixed bottom-4 center w-[1000px] z-50 ml-4">
       <div
-        className={`transition-all duration-300 shadow-md rounded-2xl p-3 border
-        ${expanded ? "h-[400px]" : "h-[48px]"} overflow-hidden flex flex-col
+        className={`transition-all duration-300 shadow-md rounded-2xl py-1 px-4 border
+        ${expanded ? "h-[600px]" : "h-[48px]"} overflow-hidden flex flex-col
         bg-white dark:bg-[#1a1a1a] border-gray-200 dark:border-neutral-700`}
       >
-        {expanded && (
-          <div className="flex-1 overflow-y-auto space-y-2 pr-1 mb-2">
+      {expanded && (
+          <div className="flex-1 overflow-y-auto space-y-2 p-4 mb-2">
             {messages.map((msg, i) => (
               <div
                 key={i}
-                className={`p-2 rounded-md text-sm whitespace-pre-wrap transition-colors duration-200
+                className={`text-sm whitespace-pre-wrap transition-colors duration-200
                 ${msg.from === "user"
-                    ? "bg-blue-100 text-black self-end dark:bg-blue-500 dark:text-white"
-                    : "bg-gray-100 text-black self-start dark:bg-neutral-800 dark:text-gray-100"
+                    ? "bg-blue-100 text-black self-end dark:bg-blue-500 dark:text-white rounded-lg inline-block max-w-[80%] py-2 px-5"
+                    : "bg-gray-100 text-black self-start dark:bg-neutral-800 dark:text-white rounded-lg p-5"
                   }`}
               >
                 <ReactMarkdown>{msg.text}</ReactMarkdown>
@@ -79,7 +79,7 @@ export default function MuseChat({ userId }: { userId: string }) {
             ))}
             {loading && <div className="text-xs text-muted-foreground">Muse is thinking...</div>}
           </div>
-        )}
+        )} 
         <div className="flex items-center gap-2">
           <textarea
             ref={inputRef}

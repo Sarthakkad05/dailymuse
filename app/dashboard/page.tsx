@@ -119,7 +119,6 @@ export default function Dashboard() {
 
   const navigationItems = [
     { icon: Home, label: "Dashboard", href: "/dashboard" },
-    { icon: MessageCircle, label: "Chat with Muse", href: "#" },
     { icon: FileText, label: "New Entry", href: "/dashboard" },
   ]
 
@@ -179,7 +178,7 @@ export default function Dashboard() {
             insight={insight}
           />
         </div>
-        {/* <MuseChat userId={session?.user?.id} /> */}
+        <MuseChat userId={session?.user?.id} />
       </div>
 
     </div>
