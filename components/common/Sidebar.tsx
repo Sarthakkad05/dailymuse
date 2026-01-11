@@ -26,7 +26,6 @@ interface SidebarProps {
 
 export default function Sidebar({ 
   navigationItems,
-  userEmail,
   onEntrySelect
 }: SidebarProps) {
   const [journalEntries, setJournalEntries] = useState<JournalEntry[]>([])
@@ -47,7 +46,7 @@ export default function Sidebar({
 
       const { data, error } = await supabase
         .from("Journal")
-        .select("id, title, content, created_at")
+        .select("id, content, created_at")
         .eq("user_id", session.user.id)
         .order("created_at", { ascending: false })
         .limit(5) // Show only the 10 most recent entries
@@ -72,9 +71,6 @@ export default function Sidebar({
     })
   }
 
-  const truncateTitle = (title: string) => {
-    return title.length > 30 ? title.substring(0, 30) + "..." : title
-  }
 
   return (
     <div className="w-64 bg-sidebar border-r border-sidebar-border flex flex-col">
@@ -144,17 +140,6 @@ export default function Sidebar({
         )}
       </div>
 
-      {/*bottomBar*/}
-      <div className="p-4 border-t border-sidebar-border">
-        <div className="flex items-center justify-between mb-2">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center">
-              <User className="w-4 h-4 text-white" />
-            </div>
-            <p className="text-sm font-medium text-sidebar-foreground">{userEmail}</p>
-          </div>
-        </div>
-      </div>
     </div>
   )
 } 

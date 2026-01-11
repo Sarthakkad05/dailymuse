@@ -24,7 +24,7 @@ export default function InsightModal({ isOpen, onClose, insight }: InsightModalP
       <div className="bg-background p-6 rounded-xl shadow-xl w-full relative max-w-4xl">
         <h2 className="text-lg font-semibold text-foreground mb-2">Insights from your journal</h2>
         
-        <div className="text-sm text-muted-foreground whitespace-pre-wrap "><ReactMarkdown >{insight}</ReactMarkdown></div>
+        <div className="text-sm text-muted-foreground whitespace-pre-wrap "><ReactMarkdown >{JSON.stringify(insight)}</ReactMarkdown></div>
         <button
           onClick={onClose}
           className="absolute top-3 right-4 text-muted-foreground hover:text-foreground transition"

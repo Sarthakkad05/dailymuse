@@ -29,9 +29,9 @@ export default function TopBar({ onSave, isSaving = false, saveStatus = "idle" }
           <button className="p-2 text-muted-foreground hover:text-foreground rounded-lg hover:bg-accent transition-colors">
             <Mic className="w-5 h-5" />
           </button>
-          <button className="p-2 text-muted-foreground hover:text-foreground rounded-lg hover:bg-accent transition-colors">
+          {/* <button className="p-2 text-muted-foreground hover:text-foreground rounded-lg hover:bg-accent transition-colors">
             <Smile className="w-5 h-5" />
-          </button>
+          </button> */}
           <ThemeToggle />
           <button 
             onClick={onSave}

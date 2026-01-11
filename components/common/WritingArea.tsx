@@ -1,29 +1,43 @@
-"use client"
+"use client";
 
-import { reflectiveQuestions } from "@/lib/gemini/reflectiveQuestions"
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect, useRef } from "react";
 
 interface WritingAreaProps {
-  onSave: (content: string) => Promise<void>
-  content: string
-  onContentChange: (content: string) => void
+  onSave: (content: string) => Promise<void>;
+  content: string;
+  onContentChange: (content: string) => void;
 }
 
-export default function WritingArea({ onSave, content, onContentChange}: WritingAreaProps) {
-  const [reflectiveQuestion, setReflectiveQuestion] = useState("")
-  const hasFetched = useRef(false)
+export default function WritingArea({
+  onSave,
+  content,
+  onContentChange,
+}: WritingAreaProps) {
+  const [reflectiveQuestion, setReflectiveQuestion] = useState("");
+  const hasFetched = useRef(false);
 
   useEffect(() => {
-    if (hasFetched.current) return
-    hasFetched.current = true
-  
-    const fetchReflectiveQuestion = async () => {
-      const question = await reflectiveQuestions()
-      setReflectiveQuestion(question)
-    }
-    fetchReflectiveQuestion();
+    if (hasFetched.current) return;
+    hasFetched.current = true;
 
-  }, [])
+    const fetchReflectiveQuestion = async () => {
+      try {
+        const res = await fetch("/api/reflective", {
+          method: "POST",
+        });
+
+        const data = await res.json();
+        setReflectiveQuestion(data.message);
+      } catch (err) {
+        console.error("Reflective fetch failed:", err);
+        setReflectiveQuestion(
+          "What’s one small moment today that quietly shaped how you’re feeling?"
+        );
+      }
+    };
+
+    fetchReflectiveQuestion();
+  }, []);
 
   return (
     <div className="flex-1 bg-background">
@@ -34,5 +48,5 @@ export default function WritingArea({ onSave, content, onContentChange}: Writing
         placeholder={reflectiveQuestion}
       />
     </div>
-  )
+  );
 }
