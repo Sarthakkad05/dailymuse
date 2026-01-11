@@ -4,11 +4,10 @@ import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Sidebar from "@/components/common/Sidebar";
-import { Home, FileText } from "lucide-react";
 import TopBar from "@/components/common/TopBar";
 import WritingArea from "@/components/common/WritingArea";
 import InsightModal from "@/components/common/InsightModal";
-import { MessageCircle } from "lucide-react";
+import { MessageCircle, FileText } from "lucide-react";
 
 interface JournalEntry {
   id: string;
@@ -25,14 +24,17 @@ export default function Dashboard() {
   const [isSaving, setIsSaving] = useState(false);
   const [saveStatus, setSaveStatus] =
     useState<"idle" | "success" | "error">("idle");
+
   const [selectedEntry, setSelectedEntry] =
     useState<JournalEntry | null>(null);
   const [isViewing, setIsViewing] = useState(false);
+
   const [isInsightModalOpen, setIsInsightModalOpen] = useState(false);
   const [insight, setInsight] = useState("");
 
   const router = useRouter();
 
+  /* ---------- AUTH ---------- */
   useEffect(() => {
     const supabase = createClient();
     supabase.auth.getSession().then(({ data }) => {
@@ -45,6 +47,7 @@ export default function Dashboard() {
     });
   }, [router]);
 
+  /* ---------- SAVE ---------- */
   const handleSave = async () => {
     if (!content.trim()) {
       setSaveStatus("error");
@@ -78,7 +81,6 @@ export default function Dashboard() {
 
       setSaveStatus("success");
       setTimeout(() => setSaveStatus("idle"), 3000);
-
     } catch (err) {
       console.error(err);
       setSaveStatus("error");
@@ -110,6 +112,7 @@ export default function Dashboard() {
 
   return (
     <div className="flex h-screen">
+      {/* ---------- SIDEBAR ---------- */}
       <Sidebar
         navigationItems={[
           { icon: MessageCircle, label: "Muse", href: "/muse" },
@@ -119,16 +122,18 @@ export default function Dashboard() {
         onEntrySelect={handleEntrySelect}
       />
 
-      <div className="flex-1 flex flex-col">
+      {/* ---------- MAIN COLUMN ---------- */}
+      <div className="flex-1 flex flex-col h-full">
         <TopBar
           onSave={handleSave}
           isSaving={isSaving}
           saveStatus={saveStatus}
         />
 
-        <div className="flex-1">
+        {/* ---------- CONTENT AREA ---------- */}
+        <div className="flex-1 min-h-0 flex">
           {isViewing && selectedEntry ? (
-            <div className="p-6 whitespace-pre-wrap">
+            <div className="h-full overflow-y-auto p-6 whitespace-pre-wrap">
               <div className="mb-4 text-sm text-muted-foreground">
                 {new Date(selectedEntry.created_at).toLocaleString()}
               </div>
@@ -149,14 +154,13 @@ export default function Dashboard() {
               onSave={handleSave}
             />
           )}
-
-          <InsightModal
-            isOpen={isInsightModalOpen}
-            onClose={() => setIsInsightModalOpen(false)}
-            insight={insight}
-          />
         </div>
 
+        <InsightModal
+          isOpen={isInsightModalOpen}
+          onClose={() => setIsInsightModalOpen(false)}
+          insight={insight}
+        />
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface WritingAreaProps {
   onSave: (content: string) => Promise<void>;
@@ -22,14 +22,10 @@ export default function WritingArea({
 
     const fetchReflectiveQuestion = async () => {
       try {
-        const res = await fetch("/api/reflective", {
-          method: "POST",
-        });
-
+        const res = await fetch("/api/reflective", { method: "POST" });
         const data = await res.json();
         setReflectiveQuestion(data.message);
-      } catch (err) {
-        console.error("Reflective fetch failed:", err);
+      } catch {
         setReflectiveQuestion(
           "What’s one small moment today that quietly shaped how you’re feeling?"
         );
@@ -40,11 +36,21 @@ export default function WritingArea({
   }, []);
 
   return (
-    <div className="flex-1 bg-background">
+    <div className="flex-1 h-full bg-background">
       <textarea
         value={content}
         onChange={(e) => onContentChange(e.target.value)}
-        className="w-full h-full resize-none border-none outline-none bg-transparent text-foreground text-lg leading-relaxed p-8 placeholder:text-muted-foreground"
+        className="
+          w-full h-full
+          resize-none
+          border-none outline-none
+          bg-transparent
+          text-foreground
+          text-lg
+          leading-relaxed
+          p-8
+          placeholder:text-muted-foreground
+        "
         placeholder={reflectiveQuestion}
       />
     </div>
