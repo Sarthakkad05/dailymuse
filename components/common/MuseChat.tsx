@@ -36,6 +36,7 @@ export default function MuseChat({ userId }: { userId: string }) {
 
     const data = await res.json();
 
+
     // push muse response
     setMessages((prev) => [
       ...prev,

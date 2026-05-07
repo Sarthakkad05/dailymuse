@@ -60,6 +60,8 @@ export default function MusePage() {
   const [userId, setUserId] = useState<string | null>(null);
   const router = useRouter();
 
+
+
   useEffect(() => {
     const supabase = createClient();
     supabase.auth.getSession().then(({ data }) => {

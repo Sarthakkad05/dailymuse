@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: dailymuse-web
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    # The .env file must be present in the same directory as this docker-compose.yml
+    # Make sure to copy the .env file to the EC2 instance before running `docker-compose up -d`
+    env_file:
+      - .env
+    environment:
+      - NODE_ENV=production
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"

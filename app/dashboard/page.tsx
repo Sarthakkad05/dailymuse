@@ -112,7 +112,6 @@ export default function Dashboard() {
 
   return (
     <div className="flex h-screen">
-      {/* ---------- SIDEBAR ---------- */}
       <Sidebar
         navigationItems={[
           { icon: MessageCircle, label: "Muse", href: "/muse" },
@@ -122,7 +121,6 @@ export default function Dashboard() {
         onEntrySelect={handleEntrySelect}
       />
 
-      {/* ---------- MAIN COLUMN ---------- */}
       <div className="flex-1 flex flex-col h-full">
         <TopBar
           onSave={handleSave}
@@ -130,7 +128,6 @@ export default function Dashboard() {
           saveStatus={saveStatus}
         />
 
-        {/* ---------- CONTENT AREA ---------- */}
         <div className="flex-1 min-h-0 flex">
           {isViewing && selectedEntry ? (
             <div className="h-full overflow-y-auto p-6 whitespace-pre-wrap">
@@ -149,6 +146,7 @@ export default function Dashboard() {
             </div>
           ) : (
             <WritingArea
+             userId={session.user.id}
               content={content}
               onContentChange={setContent}
               onSave={handleSave}

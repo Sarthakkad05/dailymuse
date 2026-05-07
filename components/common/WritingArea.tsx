@@ -3,12 +3,14 @@
 import { useEffect, useRef, useState } from "react";
 
 interface WritingAreaProps {
+  userId: string;
   onSave: (content: string) => Promise<void>;
   content: string;
   onContentChange: (content: string) => void;
 }
 
 export default function WritingArea({
+  userId,
   onSave,
   content,
   onContentChange,
@@ -22,7 +24,15 @@ export default function WritingArea({
 
     const fetchReflectiveQuestion = async () => {
       try {
-        const res = await fetch("/api/reflective", { method: "POST" });
+        const res = await fetch("/api/reflective", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Cache-Control": "no-store"
+          },
+          body: JSON.stringify({ userId }),
+        });
+    
         const data = await res.json();
         setReflectiveQuestion(data.message);
       } catch {

@@ -1,11 +1,11 @@
 import "server-only";
-import { GoogleGenerativeAIEmbeddings } from "@langchain/google-genai";
+import { OpenAIEmbeddings } from "@langchain/openai";
 import { ChatOpenAI } from "@langchain/openai";
 
 
-export const embeddingModel = new GoogleGenerativeAIEmbeddings({
-  model: "text-embedding-004",
-  apiKey: process.env.GOOGLE_API_KEY!,
+export const embeddingModel = new OpenAIEmbeddings({
+  model: "text-embedding-3-small", 
+  apiKey: process.env.OPENAI_API_KEY!,
 });
 
 export const insightsModel = new ChatOpenAI({

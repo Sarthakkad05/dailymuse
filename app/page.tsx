@@ -72,6 +72,12 @@ export default function Home() {
             >
               Sign In
             </Link>
+            <Link
+              href="/supportUs"
+              className="bg-sidebar text-foreground px-8 py-4 rounded-lg text-lg font-semibold border border-border hover:bg-accent transition-all"
+            >
+              Support Us
+            </Link>
           </div>
         </div>
       </section>
