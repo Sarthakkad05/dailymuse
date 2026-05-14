@@ -7,7 +7,8 @@ import { createClient } from "@/lib/supabase/client"
 interface NavigationItem {
   icon: React.ComponentType<{ className?: string }>
   label: string
-  href: string
+  href?: string
+  onClick?: () => void
 }
 
 interface JournalEntry {
@@ -89,6 +90,20 @@ export default function Sidebar({
       <nav className="flex-1 p-4 space-y-2">
         {navigationItems.map((item, itemIndex) => {
           const IconComponent = item.icon
+          
+          if (item.onClick) {
+            return (
+              <button
+                key={itemIndex}
+                onClick={item.onClick}
+                className="w-full flex items-center gap-3 px-3 py-2 text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground rounded-lg transition-colors"
+              >
+                <IconComponent className="w-4 h-4" />
+                <span>{item.label}</span>
+              </button>
+            )
+          }
+          
           return (
             <a 
               key={itemIndex}

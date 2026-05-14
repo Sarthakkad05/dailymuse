@@ -55,7 +55,7 @@ import { useRouter } from "next/navigation";
 import MuseChat from "@/components/common/MuseChat";
 import ThemeToggle from "@/components/common/ThemeToggle";
 import Sidebar from "@/components/common/Sidebar";
-import { MessageCircle, FileText } from "lucide-react";
+import { MessageCircle, FileText, LayoutDashboard } from "lucide-react";
 export default function MusePage() {
   const [userId, setUserId] = useState<string | null>(null);
   const router = useRouter();
@@ -85,6 +85,7 @@ export default function MusePage() {
       {/* LEFT SIDEBAR */}
       <Sidebar
         navigationItems={[
+          { icon: LayoutDashboard, label: "Dashboard", href: "/dashboard" },
           { icon: MessageCircle, label: "Muse", href: "/muse" },
           { icon: FileText, label: "New Entry", href: "/dashboard" },
         ]}

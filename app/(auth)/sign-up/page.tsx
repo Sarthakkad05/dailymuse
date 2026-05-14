@@ -17,7 +17,15 @@ export default function SignUp() {
     e.preventDefault();
     const supabase = createClient()
 
-    const { error, data } = await supabase.auth.signUp({ email, password })
+    const { error, data } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        // After the user clicks the email link, Supabase redirects here.
+        // Our /auth/confirm route exchanges the token then sends them to /sign-in.
+        emailRedirectTo: `${window.location.origin}/auth/confirm?next=/sign-in`,
+      },
+    })
 
     if (error) {
       toast.error(error.message)
