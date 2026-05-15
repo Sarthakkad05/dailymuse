@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowRight, Play, Star, Sparkles, TrendingUp, Brain, Heart } from "lucide-react";
+import { ArrowRight, Play, Star, Sparkles, TrendingUp, Brain, Heart, Flame, Laptop, Palette, GraduationCap, Briefcase, FlaskConical } from "lucide-react";
 
 function Orb({ className }: { className: string }) {
   return <div className={`orb absolute pointer-events-none ${className}`} />;
@@ -105,9 +105,9 @@ export default function HeroSection() {
               className="flex items-center gap-5"
             >
               <div className="flex -space-x-2">
-                {["🧑‍💻","👩‍🎨","🧑‍🎓","👩‍💼","🧑‍🔬"].map((emoji, i) => (
-                  <div key={i} className="w-8 h-8 rounded-full glass border border-black/10 dark:border-white/15 flex items-center justify-center text-sm">
-                    {emoji}
+                {[Laptop, Palette, GraduationCap, Briefcase, FlaskConical].map((Icon, i) => (
+                  <div key={i} className="w-8 h-8 rounded-full glass border border-black/10 dark:border-white/15 flex items-center justify-center text-sm bg-background">
+                    <Icon className="w-3.5 h-3.5 text-muted-foreground" />
                   </div>
                 ))}
               </div>
@@ -197,7 +197,7 @@ export default function HeroSection() {
               <AppCard delay={0.8} className="mt-3 border border-amber-500/20 bg-amber-500/5">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <span className="text-lg">🔥</span>
+                    <Flame className="w-5 h-5 text-amber-500 fill-amber-500" />
                     <div>
                       <p className="text-xs font-semibold" style={{ color: "var(--land-text)" }}>14-day streak</p>
                       <p className="text-[10px]" style={{ color: "var(--land-subtext)" }}>Keep it going!</p>

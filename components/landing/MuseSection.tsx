@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { MessageCircle, Sparkles } from "lucide-react";
+import { MessageCircle, Sparkles, Heart, Leaf, Moon } from "lucide-react";
 
 const conversation = [
   { role: "user", text: "I've been feeling mentally exhausted lately. Like I'm running on empty." },
@@ -147,9 +147,9 @@ export default function MuseSection() {
         {/* Capabilities */}
         <div className="grid grid-cols-3 gap-4 mt-6">
           {[
-            { label: "Emotionally aware", icon: "💜" },
-            { label: "Non-judgmental", icon: "🌿" },
-            { label: "Always available", icon: "🌙" },
+            { label: "Emotionally aware", icon: Heart, color: "text-fuchsia-500" },
+            { label: "Non-judgmental", icon: Leaf, color: "text-emerald-500" },
+            { label: "Always available", icon: Moon, color: "text-blue-500" },
           ].map((cap) => (
             <motion.div
               key={cap.label}
@@ -157,9 +157,11 @@ export default function MuseSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="glass rounded-2xl p-4 text-center border border-black/[0.07] dark:border-white/[0.07]"
+              className="glass rounded-2xl p-4 text-center border border-black/[0.07] dark:border-white/[0.07] flex flex-col items-center"
             >
-              <div className="text-2xl mb-2">{cap.icon}</div>
+              <div className={`mb-3 ${cap.color}`}>
+                <cap.icon className="w-6 h-6" />
+              </div>
               <p className="text-xs" style={{ color: "var(--land-subtext)" }}>{cap.label}</p>
             </motion.div>
           ))}

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Markdown from "react-markdown";
+import { Sparkles } from "lucide-react";
 
 export default function MuseChat({ userId }: { userId: string }) {
   const [input, setInput] = useState("");
@@ -15,23 +16,23 @@ export default function MuseChat({ userId }: { userId: string }) {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, loading]);
 
-  const sendMessage = async () => {
-    if (!input.trim() || loading) return;
+  const sendMessage = async (overrideText?: string) => {
+    const textToSend = overrideText || input;
+    if (!textToSend.trim() || loading) return;
 
-    const userMessage = input;
-    setInput("");
+    if (!overrideText) setInput("");
     setLoading(true);
 
     // push user message
     setMessages((prev) => [
       ...prev,
-      { role: "user", text: userMessage },
+      { role: "user", text: textToSend },
     ]);
 
     const res = await fetch("/api/muse", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message: userMessage, userId }),
+      body: JSON.stringify({ message: textToSend, userId }),
     });
 
     const data = await res.json();
@@ -49,7 +50,35 @@ export default function MuseChat({ userId }: { userId: string }) {
   return (
     <div className="flex flex-col h-full">
       {/* Chat Area */}
-      <div className="flex-1 overflow-y-auto no-scrollbar px-6 py-6 max-w-4xl mx-auto w-full space-y-6">
+      <div className="flex-1 overflow-y-auto no-scrollbar px-6 py-6 max-w-4xl mx-auto w-full space-y-6 flex flex-col">
+        {messages.length === 0 && !loading && (
+          <div className="flex-1 flex flex-col items-center justify-center max-w-md mx-auto text-center space-y-4 my-auto">
+            <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-2">
+              <Sparkles className="w-8 h-8 text-primary" />
+            </div>
+            <h2 className="text-2xl font-semibold text-foreground">Welcome to Muse</h2>
+            <p className="text-muted-foreground text-sm">
+              I'm your AI journaling companion. I'm here to listen, reflect, and help you find clarity. What's on your mind today?
+            </p>
+            
+            <div className="grid grid-cols-1 w-full gap-3 mt-8">
+              {[
+                "I'm feeling a bit overwhelmed today.",
+                "Help me reflect on my week.",
+                "I have a big decision to make.",
+              ].map((prompt, i) => (
+                <button
+                  key={i}
+                  onClick={() => sendMessage(prompt)}
+                  className="p-3 text-sm text-left bg-sidebar border border-border rounded-xl hover:bg-accent transition-colors"
+                >
+                  {prompt}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
         {messages.map((m, i) => (
           <div key={i}>
             {/* USER MESSAGE — RIGHT */}
@@ -100,7 +129,7 @@ export default function MuseChat({ userId }: { userId: string }) {
               className="flex-1 bg-transparent text-sm outline-none placeholder:text-muted-foreground"
             />
             <button
-              onClick={sendMessage}
+              onClick={() => sendMessage()}
               disabled={loading}
               className="text-sm px-4 py-2 rounded-full bg-primary text-primary-foreground hover:opacity-90 transition disabled:opacity-50"
             >

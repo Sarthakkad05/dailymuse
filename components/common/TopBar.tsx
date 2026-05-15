@@ -1,4 +1,4 @@
-import { Save, Mic, Smile, Loader2 } from "lucide-react"
+import { Save, Smile, Loader2 } from "lucide-react"
 import ThemeToggle from "@/components/common/ThemeToggle"
 
 interface TopBarProps {
@@ -36,9 +36,7 @@ export default function TopBar({
               Error saving journal
             </span>
           )}
-          <button className="p-2 text-muted-foreground hover:text-foreground rounded-lg hover:bg-accent transition-colors">
-            <Mic className="w-5 h-5" />
-          </button>
+
           {/* <button className="p-2 text-muted-foreground hover:text-foreground rounded-lg hover:bg-accent transition-colors">
             <Smile className="w-5 h-5" />
           </button> */}

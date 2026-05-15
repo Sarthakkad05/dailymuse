@@ -1,36 +1,36 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Star } from "lucide-react";
+import { Star, GraduationCap, Laptop, Palette, Smile, PenTool, Rocket } from "lucide-react";
 
 const testimonials = [
   {
-    name: "Priya K.", role: "Graduate Student", avatar: "👩‍🎓",
+    name: "Priya K.", role: "Graduate Student", avatar: GraduationCap,
     text: "DailyMuse helped me realize I was burning out weeks before I would have noticed on my own. The AI insights are eerily accurate.",
     stars: 5, gradient: "from-violet-500/8 to-purple-500/3", border: "border-violet-500/20",
   },
   {
-    name: "Marcus L.", role: "Indie Developer", avatar: "🧑‍💻",
+    name: "Marcus L.", role: "Indie Developer", avatar: Laptop,
     text: "I've tried 10 journaling apps. This is the first one that actually made me *want* to journal. Muse feels like a real conversation.",
     stars: 5, gradient: "from-blue-500/8 to-cyan-500/3", border: "border-blue-500/20",
   },
   {
-    name: "Sofia R.", role: "UX Designer & Creator", avatar: "👩‍🎨",
+    name: "Sofia R.", role: "UX Designer & Creator", avatar: Palette,
     text: "The mood tracking revealed that my most creative hours are right after journaling. Changed how I structure my entire day.",
     stars: 5, gradient: "from-fuchsia-500/8 to-pink-500/3", border: "border-fuchsia-500/20",
   },
   {
-    name: "Aryan M.", role: "Mental Health Advocate", avatar: "🧘",
+    name: "Aryan M.", role: "Mental Health Advocate", avatar: Smile,
     text: "As someone who struggled with anxiety, having a judgment-free space to process thoughts daily has been genuinely life-changing.",
     stars: 5, gradient: "from-emerald-500/8 to-teal-500/3", border: "border-emerald-500/20",
   },
   {
-    name: "Claire D.", role: "Content Strategist", avatar: "✍️",
+    name: "Claire D.", role: "Content Strategist", avatar: PenTool,
     text: "The weekly AI summaries blow my mind every time. It finds patterns in my writing I never would have caught myself.",
     stars: 5, gradient: "from-amber-500/8 to-orange-500/3", border: "border-amber-500/20",
   },
   {
-    name: "Ryo T.", role: "Startup Founder", avatar: "🚀",
+    name: "Ryo T.", role: "Startup Founder", avatar: Rocket,
     text: "I use it every morning. It's become as essential as coffee. The clarity it gives me before meetings is unreal.",
     stars: 5, gradient: "from-rose-500/8 to-red-500/3", border: "border-rose-500/20",
   },
@@ -80,8 +80,8 @@ export default function TestimonialsSection() {
               </p>
 
               <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-xl glass flex items-center justify-center text-lg border border-black/[0.07] dark:border-white/10">
-                  {t.avatar}
+                <div className="w-9 h-9 rounded-xl glass flex items-center justify-center text-lg border border-black/[0.07] dark:border-white/10 text-muted-foreground">
+                  <t.avatar className="w-4 h-4" />
                 </div>
                 <div>
                   <p className="text-sm font-semibold" style={{ color: "var(--land-text)" }}>{t.name}</p>

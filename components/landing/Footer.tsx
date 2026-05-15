@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Sparkles, Twitter, Github, Instagram } from "lucide-react";
+import { Sparkles, Twitter, Github, Instagram, Heart } from "lucide-react";
 
 const links = {
   Product: ["Features", "How It Works", "Muse AI", "Pricing"],
@@ -85,7 +85,7 @@ export default function Footer() {
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs" style={{ color: "var(--land-subtext)", opacity: 0.45 }}>
           <p>© 2025 DailyMuse. All rights reserved.</p>
           <p className="flex items-center gap-1">
-            Made with <span className="text-fuchsia-500">♥</span> for reflective minds
+            Made with <Heart className="w-3.5 h-3.5 fill-current text-fuchsia-500" /> for reflective minds
           </p>
         </div>
       </div>
