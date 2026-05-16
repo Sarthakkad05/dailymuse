@@ -32,9 +32,8 @@ export default function HeroSection() {
     <section ref={ref} className="relative min-h-screen flex items-center overflow-hidden pt-20">
       {/* Background */}
       <div className="absolute inset-0 grid-overlay" />
-      <Orb className="w-[500px] h-[500px] bg-violet-600/25 -top-32 -left-40 orb-slow" />
-      <Orb className="w-[400px] h-[400px] bg-blue-600/20 top-1/2 -right-24" />
-      <Orb className="w-[300px] h-[300px] bg-fuchsia-600/15 bottom-0 left-1/3" />
+      <div className="orb absolute w-[600px] h-[600px] -top-32 -left-40 orb-slow" />
+      <div className="orb absolute w-[400px] h-[400px] bottom-0 right-0" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 w-full py-24">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -46,10 +45,10 @@ export default function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="inline-flex items-center gap-2 px-4 py-1.5 glass rounded-full mb-8 border border-violet-500/25"
+              className="inline-flex items-center gap-2 px-4 py-1.5 glass rounded-full mb-8 border border-black/10 dark:border-white/10"
             >
-              <Sparkles className="w-3.5 h-3.5 text-violet-500 dark:text-violet-400" />
-              <span className="text-xs text-violet-600 dark:text-violet-300 font-medium">AI-Powered Journaling Platform</span>
+              <Sparkles className="w-3.5 h-3.5" style={{ color: 'var(--land-subtext)' }} />
+              <span className="text-xs font-medium" style={{ color: 'var(--land-subtext)' }}>AI-Powered Journaling Platform</span>
             </motion.div>
 
             {/* Headline */}
@@ -131,9 +130,6 @@ export default function HeroSection() {
             transition={{ duration: 1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
             className="relative hidden lg:block"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-violet-600/15 via-blue-600/8 to-fuchsia-600/10 rounded-3xl blur-3xl scale-110" />
-
-            {/* Main journal card */}
             <div className="relative glass-strong rounded-3xl p-5 glow-purple">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2">

@@ -47,9 +47,8 @@ export default function Navbar() {
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2.5 group">
               <div className="relative">
-                <div className="absolute inset-0 rounded-lg bg-violet-500/20 blur-md group-hover:blur-lg transition-all" />
-                <div className="relative p-1.5 rounded-lg bg-gradient-to-br from-violet-600 to-blue-500">
-                  <Sparkles className="w-4 h-4 text-white" />
+                <div className="relative w-7 h-7 rounded-lg glass border border-black/10 dark:border-white/10 flex items-center justify-center group-hover:border-black/20 dark:group-hover:border-white/20 transition-colors">
+                  <Sparkles className="w-3.5 h-3.5" style={{ color: 'var(--land-subtext)' }} />
                 </div>
               </div>
               <span

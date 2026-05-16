@@ -137,7 +137,6 @@ const features = [
 export default function FeaturesSection() {
   return (
     <section id="features" className="relative py-24 overflow-hidden">
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-violet-600/5 dark:bg-violet-900/10 blur-3xl pointer-events-none" />
 
       <div className="max-w-6xl mx-auto px-6">
         <motion.div
@@ -164,14 +163,10 @@ export default function FeaturesSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.6, delay: i * 0.06 }}
-              whileHover={{ y: -4, scale: 1.01 }}
-              className={`${f.size} group relative rounded-2xl p-5 overflow-hidden border cursor-default transition-all duration-300 ${f.border}`}
-              style={{ background: `radial-gradient(ellipse at top left, ${f.glow}, transparent 70%), var(--land-glass-bg)` }}
+              whileHover={{ y: -3 }}
+              className={`${f.size} group relative rounded-2xl p-5 overflow-hidden border cursor-default transition-all duration-300 border-black/[0.07] dark:border-white/[0.07]`}
+              style={{ background: 'var(--land-glass-bg)' }}
             >
-              <div
-                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-2xl"
-                style={{ boxShadow: `inset 0 0 40px ${f.glow}` }}
-              />
               <div className={`w-8 h-8 rounded-xl flex items-center justify-center mb-3 bg-gradient-to-br ${f.gradient}`}>
                 <f.icon className={`w-4 h-4 ${f.accent}`} />
               </div>
