@@ -4,7 +4,13 @@ export interface ReflectionContext {
     severityLevel: "low" | "medium" | "high";
   }
   
-  export function buildReflectionContext(entries: any[]): ReflectionContext | null {
+  interface JournalEntryRaw {
+    primary_emotion?: string;
+    secondary_emotions?: string[];
+    severity?: number;
+  }
+  
+  export function buildReflectionContext(entries: JournalEntryRaw[]): ReflectionContext | null {
     if (!entries?.length) return null;
   
     const emotionCount: Record<string, number> = {};

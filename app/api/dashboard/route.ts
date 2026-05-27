@@ -48,7 +48,7 @@ export async function GET() {
       
       if (uniqueDates.includes(currentDateStr)) {
           let currentStreak = 0;
-          let checkDate = new Date();
+          const checkDate = new Date();
           if (currentDateStr === yesterdayStr) {
               checkDate.setDate(checkDate.getDate() - 1);
           }

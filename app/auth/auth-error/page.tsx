@@ -6,7 +6,7 @@ import { Suspense } from "react";
 
 function ErrorContent() {
   const params = useSearchParams();
-  const error = params.get("error") ?? "Something went wrong with your verification link.";
+  params.get("error");
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen px-4 text-center">

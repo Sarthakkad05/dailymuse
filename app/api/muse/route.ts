@@ -29,7 +29,7 @@ export async function POST(req: Request) {
     const memoryText = memories?.length
       ? memories
           .map(
-            (m: any, i: number) =>
+            (m: { short_summary: string }, i: number) =>
               `${i + 1}. ${m.short_summary}`
           )
           .join("\n")

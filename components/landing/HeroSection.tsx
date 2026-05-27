@@ -5,9 +5,6 @@ import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, Play, Star, Sparkles, TrendingUp, Brain, Heart, Flame, Laptop, Palette, GraduationCap, Briefcase, FlaskConical } from "lucide-react";
 
-function Orb({ className }: { className: string }) {
-  return <div className={`orb absolute pointer-events-none ${className}`} />;
-}
 
 function AppCard({ delay, className, children }: { delay: number; className?: string; children: React.ReactNode }) {
   return (
@@ -134,7 +131,7 @@ export default function HeroSection() {
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-violet-500" />
-                  <span className="text-xs font-medium" style={{ color: "var(--land-subtext)" }}>Today's Entry · May 13</span>
+                  <span className="text-xs font-medium" style={{ color: "var(--land-subtext)" }}>Today&apos;s Entry · May 13</span>
                 </div>
                 <div className="flex gap-1.5">
                   <div className="w-2 h-2 rounded-full bg-red-400/70" />
@@ -146,7 +143,7 @@ export default function HeroSection() {
               {/* Writing area */}
               <div className="bg-black/[0.03] dark:bg-white/[0.03] rounded-2xl p-4 mb-4 border border-black/[0.06] dark:border-white/[0.06]">
                 <p className="text-sm leading-relaxed" style={{ color: "var(--land-subtext)" }}>
-                  I've been feeling scattered lately — too many ideas, not enough clarity.
+                  I&apos;ve been feeling scattered lately — too many ideas, not enough clarity.
                   But after my morning walk, something shifted...
                 </p>
                 <div className="mt-3 flex items-center gap-1.5">

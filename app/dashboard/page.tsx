@@ -8,7 +8,7 @@ import TopBar from "@/components/common/TopBar";
 import WritingArea from "@/components/common/WritingArea";
 import InsightModal from "@/components/common/InsightModal";
 import { MessageCircle, FileText, LayoutDashboard } from "lucide-react";
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
+import { Card, CardHeader, CardDescription, CardContent } from "@/components/ui/card";
 
 interface JournalEntry {
   id: string;
@@ -18,7 +18,7 @@ interface JournalEntry {
 }
 
 export default function Dashboard() {
-  const [session, setSession] = useState<any>(null);
+  const [session, setSession] = useState<{ user: { id: string; email?: string; user_metadata: { full_name?: string } } } | null>(null);
   const [loading, setLoading] = useState(true);
 
   const [content, setContent] = useState("");
@@ -33,11 +33,16 @@ export default function Dashboard() {
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  const [dashboardStats, setDashboardStats] = useState({
+  const [dashboardStats, setDashboardStats] = useState<{
+    entriesCount: number;
+    streak: number;
+    latestInsight: string;
+    recentEntry: { content: string; created_at: string } | null;
+  }>({
     entriesCount: 0,
     streak: 0,
     latestInsight: "Loading your insights...",
-    recentEntry: null as any
+    recentEntry: null,
   });
 
   const router = useRouter();
@@ -81,6 +86,8 @@ export default function Dashboard() {
       setTimeout(() => setSaveStatus("idle"), 3000);
       return;
     }
+
+    if (!session) return;
 
     setIsSaving(true);
     setSaveStatus("idle");
@@ -150,6 +157,8 @@ export default function Dashboard() {
     );
   }
 
+  if (!session) return null;
+
   const userName = session?.user?.user_metadata?.full_name?.split(' ')[0] || session?.user?.email?.split('@')[0] || "there";
   const currentDate = new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' });
 
@@ -161,7 +170,7 @@ export default function Dashboard() {
           { icon: MessageCircle, label: "Muse", href: "/muse" },
           { icon: FileText, label: "New Entry", onClick: handleNewEntry },
         ]}
-        userEmail={session.user.email}
+        userEmail={session.user.email ?? ""}
         onEntrySelect={handleEntrySelect}
         isOpen={isSidebarOpen}
         onClose={() => setIsSidebarOpen(false)}

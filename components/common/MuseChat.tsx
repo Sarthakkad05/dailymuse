@@ -58,7 +58,7 @@ export default function MuseChat({ userId }: { userId: string }) {
             </div>
             <h2 className="text-2xl font-semibold text-foreground">Welcome to Muse</h2>
             <p className="text-muted-foreground text-sm">
-              I'm your AI journaling companion. I'm here to listen, reflect, and help you find clarity. What's on your mind today?
+              I&apos;m your AI journaling companion. I&apos;m here to listen, reflect, and help you find clarity. What&apos;s on your mind today?
             </p>
             
             <div className="grid grid-cols-1 w-full gap-3 mt-8">

@@ -58,7 +58,7 @@ export default function MuseSection() {
             <span className="grad-text">listens</span>
           </h2>
           <p className="text-lg max-w-xl mx-auto" style={{ color: "var(--land-subtext)" }}>
-            Muse isn't a chatbot. It's an emotionally intelligent companion trained to help you
+            Muse isn&apos;t a chatbot. It&apos;s an emotionally intelligent companion trained to help you
             think clearly and feel understood.
           </p>
         </motion.div>

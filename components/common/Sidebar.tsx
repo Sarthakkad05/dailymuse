@@ -1,7 +1,8 @@
 "use client"
 
-import { Sparkles, FileText, Calendar, X } from "lucide-react"
+import { Sparkles, FileText, Calendar, X, LogOut } from "lucide-react"
 import { useState, useEffect } from "react"
+import { useRouter } from "next/navigation"
 import { createClient } from "@/lib/supabase/client"
 
 interface NavigationItem {
@@ -35,10 +36,25 @@ export default function Sidebar({
 }: SidebarProps) {
   const [journalEntries, setJournalEntries] = useState<JournalEntry[]>([])
   const [loading, setLoading] = useState(true)
+  const [userEmail, setUserEmail] = useState<string>("")
+  const router = useRouter()
 
   useEffect(() => {
     fetchJournalEntries()
+    fetchUser()
   }, [])
+
+  const fetchUser = async () => {
+    const supabase = createClient()
+    const { data: { session } } = await supabase.auth.getSession()
+    if (session?.user?.email) setUserEmail(session.user.email)
+  }
+
+  const handleLogout = async () => {
+    const supabase = createClient()
+    await supabase.auth.signOut()
+    router.push("/sign-in")
+  }
 
   const fetchJournalEntries = async () => {
     try {
@@ -172,6 +188,25 @@ export default function Sidebar({
             ))}
           </div>
         )}
+      </div>
+
+      {/* User footer + logout */}
+      <div className="border-t border-sidebar-border p-3 mt-auto">
+        <div className="flex items-center gap-2 group px-2 py-2 rounded-lg hover:bg-sidebar-accent transition-colors">
+          <div className="w-7 h-7 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center flex-shrink-0">
+            <span className="text-white text-xs font-semibold">
+              {userEmail ? userEmail[0].toUpperCase() : "?"}
+            </span>
+          </div>
+          <span className="text-xs text-muted-foreground truncate flex-1 min-w-0">{userEmail}</span>
+          <button
+            onClick={handleLogout}
+            aria-label="Sign out"
+            className="flex-shrink-0 p-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity hover:text-destructive text-muted-foreground"
+          >
+            <LogOut className="w-3.5 h-3.5" />
+          </button>
+        </div>
       </div>
     </div>
   )

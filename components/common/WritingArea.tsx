@@ -12,7 +12,6 @@ interface WritingAreaProps {
 
 export default function WritingArea({
   userId,
-  onSave,
   content,
   onContentChange,
 }: WritingAreaProps) {

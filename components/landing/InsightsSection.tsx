@@ -49,7 +49,7 @@ export default function InsightsSection() {
             <span className="grad-text">decoded</span>
           </h2>
           <p className="text-lg max-w-2xl mx-auto leading-relaxed" style={{ color: "var(--land-subtext)" }}>
-            DailyMuse doesn't just store your thoughts — it understands them.
+            DailyMuse doesn&apos;t just store your thoughts — it understands them.
             Every entry becomes a data point in your personal emotional map.
           </p>
         </motion.div>
@@ -98,11 +98,11 @@ export default function InsightsSection() {
         >
           <Sparkles className="w-8 h-8 text-violet-600 dark:text-violet-400 mx-auto mb-4" />
           <p className="text-xl md:text-2xl leading-relaxed max-w-3xl mx-auto font-light" style={{ color: "var(--land-subtext)" }}>
-            "You tend to feel overwhelmed before deadlines —{" "}
+            &ldquo;You tend to feel overwhelmed before deadlines &mdash;{" "}
             <span className="font-medium" style={{ color: "var(--land-text)" }}>
               but journaling consistently reduces your stress levels
             </span>{" "}
-            within 48 hours. You're getting better at this."
+            within 48 hours. You&apos;re getting better at this.&rdquo;
           </p>
           <p className="mt-4 text-sm" style={{ color: "var(--land-subtext)", opacity: 0.6 }}>
             — From your Muse Weekly Summary

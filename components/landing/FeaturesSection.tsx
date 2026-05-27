@@ -28,7 +28,7 @@ const features = [
     glow: "rgba(59,130,246,0.12)", size: "col-span-2 md:col-span-1", accent: "text-blue-600 dark:text-blue-400",
     preview: (
       <div className="mt-3 glass rounded-xl p-2.5 text-[11px] leading-relaxed" style={{ color: "var(--land-subtext)" }}>
-        "It sounds like you've been carrying a lot. Let's unpack that together..."
+        &ldquo;It sounds like you&apos;ve been carrying a lot. Let&apos;s unpack that together...&rdquo;
       </div>
     ),
   },
@@ -128,7 +128,7 @@ const features = [
     glow: "rgba(245,158,11,0.1)", size: "col-span-2 md:col-span-2", accent: "text-amber-600 dark:text-amber-400",
     preview: (
       <div className="mt-3 glass rounded-xl p-3 text-[11px] leading-relaxed" style={{ color: "var(--land-subtext)" }}>
-        "You started this week feeling scattered, but by Thursday your entries show a clear shift toward calm focus. Your gratitude practice is working."
+        &ldquo;You started this week feeling scattered, but by Thursday your entries show a clear shift toward calm focus. Your gratitude practice is working.&rdquo;
       </div>
     ),
   },
