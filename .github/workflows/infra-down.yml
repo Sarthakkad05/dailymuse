@@ -35,8 +35,6 @@ jobs:
         run: terraform destroy -auto-approve
         env:
           TF_VAR_key_name: ${{ secrets.TF_VAR_key_name }}
-          TF_VAR_db_username: ${{ secrets.TF_VAR_db_username }}
-          TF_VAR_db_password: ${{ secrets.TF_VAR_db_password }}
 
       - name: Confirm destruction
         run: echo "✅ All infrastructure destroyed successfully"

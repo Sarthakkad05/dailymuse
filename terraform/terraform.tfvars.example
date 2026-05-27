@@ -11,6 +11,3 @@ key_name = "my-aws-key-name"
 # Leave ami_id empty to use the latest Ubuntu 22.04 AMI
 # ami_id = "ami-xxxxxx"
 
-db_username = "dailymuse_admin"
-# Generate a strong, secure password for the database
-db_password = "ReplaceWithStrongPassword123!"

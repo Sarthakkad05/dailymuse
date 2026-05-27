@@ -30,18 +30,6 @@ variable "public_subnet_cidr" {
   default     = "10.0.1.0/24"
 }
 
-variable "private_subnet_1_cidr" {
-  description = "CIDR block for the first private subnet (RDS)"
-  type        = string
-  default     = "10.0.2.0/24"
-}
-
-variable "private_subnet_2_cidr" {
-  description = "CIDR block for the second private subnet (RDS DB Subnet Group requires 2 AZs)"
-  type        = string
-  default     = "10.0.3.0/24"
-}
-
 # EC2
 variable "instance_type" {
   description = "EC2 instance type"
@@ -60,27 +48,3 @@ variable "ami_id" {
   default     = ""
 }
 
-# RDS
-variable "db_instance_class" {
-  description = "RDS instance type"
-  type        = string
-  default     = "db.t3.micro" # Suitable for free-tier/low cost
-}
-
-variable "db_name" {
-  description = "Name of the PostgreSQL database"
-  type        = string
-  default     = "dailymuse"
-}
-
-variable "db_username" {
-  description = "Database administrator username"
-  type        = string
-  sensitive   = true
-}
-
-variable "db_password" {
-  description = "Database administrator password"
-  type        = string
-  sensitive   = true
-}
