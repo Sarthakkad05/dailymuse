@@ -50,7 +50,7 @@ export default function MuseChat({ userId }: { userId: string }) {
   return (
     <div className="flex flex-col h-full">
       {/* Chat Area */}
-      <div className="flex-1 overflow-y-auto no-scrollbar px-6 py-6 max-w-4xl mx-auto w-full space-y-6 flex flex-col">
+      <div className="flex-1 overflow-y-auto no-scrollbar px-3 md:px-6 py-4 md:py-6 max-w-4xl mx-auto w-full space-y-6 flex flex-col">
         {messages.length === 0 && !loading && (
           <div className="flex-1 flex flex-col items-center justify-center max-w-md mx-auto text-center space-y-4 my-auto">
             <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-2">
@@ -84,7 +84,7 @@ export default function MuseChat({ userId }: { userId: string }) {
             {/* USER MESSAGE — RIGHT */}
             {m.role === "user" && (
               <div className="flex justify-end">
-                <div className="max-w-[75%] text-sm leading-relaxed bg-primary text-primary-foreground rounded-2xl px-4 py-3">
+                <div className="max-w-[85%] md:max-w-[75%] text-sm leading-relaxed bg-primary text-primary-foreground rounded-2xl px-4 py-3">
                   {m.text}
                 </div>
               </div>
@@ -118,9 +118,9 @@ export default function MuseChat({ userId }: { userId: string }) {
       </div>
 
       {/* Input */}
-      <div className="bg-background px-4 py-4">
+      <div className="bg-background px-3 md:px-4 py-3 md:py-4">
         <div className="max-w-3xl mx-auto">
-          <div className="flex items-center gap-3 bg-sidebar border rounded-full px-4 py-2">
+          <div className="flex items-center gap-2 md:gap-3 bg-sidebar border rounded-full px-3 md:px-4 py-2">
             <input
               value={input}
               onChange={(e) => setInput(e.target.value)}

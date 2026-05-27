@@ -8,13 +8,11 @@ terraform {
     }
   }
 
-  # For a portfolio, local state is used by default.
-  # To use an S3 backend for production, uncomment and configure:
-  # backend "s3" {
-  #   bucket         = "dailymuse-terraform-state"
-  #   key            = "state/terraform.tfstate"
-  #   region         = "us-east-1"
-  #   encrypt        = true
-  #   dynamodb_table = "terraform-lock"
-  # }
+  backend "s3" {
+    bucket  = "dailymuse-terraform-state"
+    key     = "state/terraform.tfstate"
+    region  = "us-east-1"
+    encrypt = true
+    # dynamodb_table = "terraform-lock"  # Uncomment to add state locking via DynamoDB
+  }
 }

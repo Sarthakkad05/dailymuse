@@ -1,0 +1,74 @@
+name: Infra Up
+
+on:
+  workflow_dispatch:
+
+jobs:
+  infra-up:
+    name: Provision Infrastructure & Deploy
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: terraform
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "~> 1.5"
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Terraform Init (S3 backend)
+        run: terraform init
+
+      - name: Terraform Format Check
+        run: terraform fmt -check
+
+      - name: Terraform Validate
+        run: terraform validate
+
+      - name: Terraform Plan
+        run: terraform plan -out=tfplan
+        env:
+          TF_VAR_key_name: ${{ secrets.TF_VAR_key_name }}
+          TF_VAR_db_username: ${{ secrets.TF_VAR_db_username }}
+          TF_VAR_db_password: ${{ secrets.TF_VAR_db_password }}
+
+      - name: Terraform Apply
+        run: terraform apply tfplan
+        env:
+          TF_VAR_key_name: ${{ secrets.TF_VAR_key_name }}
+          TF_VAR_db_username: ${{ secrets.TF_VAR_db_username }}
+          TF_VAR_db_password: ${{ secrets.TF_VAR_db_password }}
+
+      - name: Get EC2 Public IP
+        id: ec2-ip
+        run: echo "EC2_IP=$(terraform output -raw ec2_public_ip)" >> $GITHUB_OUTPUT
+
+      - name: Wait for EC2 to boot
+        run: sleep 90
+
+      - name: Deploy application via SSH
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ steps.ec2-ip.outputs.EC2_IP }}
+          username: ubuntu
+          key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
+          script: |
+            cd /home/ubuntu/dailymuse
+            git pull origin main
+            docker-compose down
+            docker-compose up -d --build
+
+      - name: Print live app URL
+        run: echo "✅ App is live at http://${{ steps.ec2-ip.outputs.EC2_IP }}"

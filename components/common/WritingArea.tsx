@@ -128,15 +128,15 @@ export default function WritingArea({
           border-none outline-none
           bg-transparent
           text-foreground
-          text-lg
+          text-base md:text-lg
           leading-relaxed
-          p-8 pb-24
+          p-4 md:p-8 pb-24
           placeholder:text-muted-foreground
         "
         placeholder={reflectiveQuestion}
       />
 
-      <div className="absolute bottom-8 right-8 flex items-center gap-4">
+      <div className="absolute bottom-4 md:bottom-8 right-4 md:right-8 flex items-center gap-3 md:gap-4">
         {isTranscribing && (
           <div className="flex items-center gap-2 text-sm text-muted-foreground animate-pulse">
             <Loader2 className="w-4 h-4 animate-spin" />

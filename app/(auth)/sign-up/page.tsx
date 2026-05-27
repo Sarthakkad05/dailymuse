@@ -54,7 +54,7 @@ export default function SignUp() {
         </Link>
 
         {/* Card */}
-        <div className="glass-strong rounded-2xl p-8 space-y-6">
+        <div className="glass-strong rounded-2xl p-6 md:p-8 space-y-6">
           <div className="space-y-1 text-center">
             <h1 className="text-xl font-semibold" style={{ color: 'var(--land-text)' }}>Create your account</h1>
             <p className="text-sm" style={{ color: 'var(--land-subtext)' }}>Start journaling today.</p>
