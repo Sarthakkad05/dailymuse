@@ -63,8 +63,14 @@ jobs:
           script: |
             cd /home/ubuntu/dailymuse
             git pull origin main
-            docker-compose down
-            docker-compose up -d --build
+            cat << 'EOF' > .env
+            NEXT_PUBLIC_SUPABASE_URL=${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+            NEXT_PUBLIC_SUPABASE_ANON_KEY=${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+            SUPABASE_SERVICE_ROLE_KEY=${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+            OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}
+            EOF
+            docker-compose build
+            docker-compose up -d
 
       - name: Print live app URL
         run: echo "✅ App is live at http://${{ steps.ec2-ip.outputs.EC2_IP }}"

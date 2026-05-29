@@ -1,11 +1,18 @@
 name: Deploy
 
 on:
+  workflow_run:
+    workflows: ["CI"]
+    types:
+      - completed
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:
   deploy:
     name: Redeploy App to EC2
+    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' }}
     runs-on: ubuntu-latest
 
     steps:
@@ -19,17 +26,46 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
+      - name: Check if Infrastructure is UP
+        id: check-infra
+        run: |
+          IP=$(aws ec2 describe-instances \
+            --filters "Name=tag:Name,Values=dailymuse-app-server" "Name=instance-state-name,Values=running" \
+            --query "Reservations[0].Instances[0].PublicIpAddress" \
+            --output text)
+          
+          if [ "$IP" == "None" ] || [ -z "$IP" ]; then
+            echo "No running EC2 instance found. Infrastructure is DOWN."
+            echo "is_up=false" >> $GITHUB_OUTPUT
+          else
+            echo "Found EC2 instance running at $IP. Infrastructure is UP."
+            echo "is_up=true" >> $GITHUB_OUTPUT
+            echo "ip=$IP" >> $GITHUB_OUTPUT
+          fi
+
       - name: Deploy application via SSH
+        if: steps.check-infra.outputs.is_up == 'true'
         uses: appleboy/ssh-action@v1
         with:
-          host: ${{ secrets.EC2_PUBLIC_IP }}
+          host: ${{ steps.check-infra.outputs.ip }}
           username: ubuntu
           key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
           script: |
             cd /home/ubuntu/dailymuse
             git pull origin main
-            docker-compose down
-            docker-compose up -d --build
+            cat << 'EOF' > .env
+            NEXT_PUBLIC_SUPABASE_URL=${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+            NEXT_PUBLIC_SUPABASE_ANON_KEY=${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+            SUPABASE_SERVICE_ROLE_KEY=${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+            OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}
+            EOF
+            docker-compose build
+            docker-compose up -d
 
       - name: Print deployment confirmation
-        run: echo "✅ Deployment complete — app running at http://${{ secrets.EC2_PUBLIC_IP }}"
+        if: steps.check-infra.outputs.is_up == 'true'
+        run: echo "✅ Deployment complete — app running at http://${{ steps.check-infra.outputs.ip }}"
+        
+      - name: Skip notification
+        if: steps.check-infra.outputs.is_up == 'false'
+        run: echo "⏭️ Skipped deployment because the infrastructure is not running."
